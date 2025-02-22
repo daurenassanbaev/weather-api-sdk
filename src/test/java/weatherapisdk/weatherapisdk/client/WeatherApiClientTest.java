@@ -2,6 +2,7 @@ package weatherapisdk.weatherapisdk.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("Tests for WeatherApiClient")
 class WeatherApiClientTest {
 
     @Mock
@@ -35,13 +37,14 @@ class WeatherApiClientTest {
     private WeatherApiClient weatherApiClient;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         ReflectionTestUtils.setField(weatherApiClient, "restTemplate", restTemplate);
         ReflectionTestUtils.setField(weatherApiClient, "objectMapper", objectMapper);
     }
 
     @Test
-    void testFetchWeatherData_Success() throws Exception {
+    @DisplayName("Should fetch weather data successfully")
+    void givenValidCityAndApiKey_whenFetchWeatherData_thenReturnWeatherData() throws Exception {
         // Given
         String city = "London";
         String apiKey = "test-api-key";
@@ -62,7 +65,8 @@ class WeatherApiClientTest {
     }
 
     @Test
-    void testFetchWeatherData_CityNotFoundException() {
+    @DisplayName("Should throw CityNotFoundException when city is not found")
+    void givenUnknownCity_whenFetchWeatherData_thenThrowCityNotFoundException() {
         // Given
         String city = "UnknownCity";
         String apiKey = "test-api-key";
@@ -76,7 +80,8 @@ class WeatherApiClientTest {
     }
 
     @Test
-    void testFetchWeatherData_InvalidAPIKeyException() {
+    @DisplayName("Should throw InvalidAPIKeyException when API key is invalid")
+    void givenInvalidApiKey_whenFetchWeatherData_thenThrowInvalidAPIKeyException() {
         // Given
         String city = "London";
         String apiKey = "invalid-key";
@@ -90,7 +95,8 @@ class WeatherApiClientTest {
     }
 
     @Test
-    void testFetchWeatherData_NetworkException() {
+    @DisplayName("Should throw NetworkException when network error occurs")
+    void givenNetworkIssue_whenFetchWeatherData_thenThrowNetworkException() {
         // Given
         String city = "London";
         String apiKey = "test-api-key";
@@ -104,7 +110,8 @@ class WeatherApiClientTest {
     }
 
     @Test
-    void testFetchWeatherData_RuntimeException() {
+    @DisplayName("Should throw RuntimeException on unexpected error")
+    void givenUnexpectedError_whenFetchWeatherData_thenThrowRuntimeException() {
         // Given
         String city = "London";
         String apiKey = "test-api-key";
