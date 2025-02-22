@@ -1,0 +1,6 @@
+spring:
+  application:
+    name:
+      weather-api-sdk
+cron-job:
+  weather-updates-rate: 600000
