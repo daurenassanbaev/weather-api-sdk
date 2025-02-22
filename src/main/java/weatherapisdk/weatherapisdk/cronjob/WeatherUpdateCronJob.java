@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import weatherapisdk.weatherapisdk.factory.WeatherSDKFactory;
 import weatherapisdk.weatherapisdk.model.enums.Mode;
 
+/**
+ * Scheduled job for weather updates.
+ */
 @Service
 @EnableScheduling
 public class WeatherUpdateCronJob {
@@ -19,6 +22,11 @@ public class WeatherUpdateCronJob {
         this.weatherSDKFactory = weatherSDKFactory;
     }
 
+    /**
+     * Periodically updates weather data.
+     *
+     * Runs at a fixed rate defined in the configuration.
+     */
     @Scheduled(fixedRateString = "${cron-job.weather-updates-rate}")
     public void pollWeatherUpdates() {
         log.info("Polling: Starting weather updates for all SDK instances...");

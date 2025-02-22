@@ -11,10 +11,14 @@ import weatherapisdk.weatherapisdk.exception.InvalidAPIKeyException;
 import weatherapisdk.weatherapisdk.exception.NetworkException;
 import weatherapisdk.weatherapisdk.model.WeatherData;
 
+/**
+ * Client for interacting with OpenWeather API.
+ */
 @Component
 public class WeatherApiClient {
 
     private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather";
+
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
 
@@ -23,6 +27,17 @@ public class WeatherApiClient {
         this.objectMapper = new ObjectMapper();
     }
 
+    /**
+     * Gets weather data for the specified city.
+     *
+     * @param city The name of the city.
+     * @param apiKey The API key to access OpenWeather.
+     * @return A {@link WeatherData} object containing the weather data.
+     * @throws CityNotFoundException if the city was not found.
+     * @throws InvalidAPIKeyException if the API key is invalid.
+     * @throws NetworkException if a network error occurred.
+     * @throws RuntimeException if another error occurred while calling the API.
+     */
     public WeatherData fetchWeatherData(String city, String apiKey) {
         String url = String.format("%s?q=%s&appid=%s", API_URL, city.trim().toLowerCase(), apiKey);
         try {
