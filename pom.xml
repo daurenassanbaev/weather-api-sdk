@@ -10,7 +10,7 @@
     </parent>
     <groupId>weather-api-sdk</groupId>
     <artifactId>weather-api-sdk</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <name>weather-api-sdk</name>
     <description>weather-api-sdk</description>
